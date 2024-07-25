@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #4a8fcb;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #0073e6;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        button.cancel {
+            background-color: #ccc;
+        }
+
+        .output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="registrationForm">
+            <label for="fullName">NOME COMPLETO:</label>
+            <input type="text" id="fullName" name="fullName" required>
+
+            <label for="phone">Nº DE TELEFONE:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="email">E-MAIL:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="birthDate">DATA DE NASCIMENTO:</label>
+            <input type="date" id="birthDate" name="birthDate" required>
+
+            <label for="username">NOME DE USUÁRIO:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">SENHA:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="button" id="registerBtn">CADASTRAR</button>
+            <button type="button" id="cancelBtn" class="cancel">CANCELAR</button>
+        </form>
+        <div id="output" class="output"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
