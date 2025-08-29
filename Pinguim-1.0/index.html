@@ -5,18 +5,444 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <title>O Pinguim Rei</title>
-    <link rel="stylesheet" href="style.css">
-    <style>* {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
-    }
-    #highlight {
-            color: #0073e6; /* Cor azul chamativa */
-            font-weight: bold;
-        }</style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary-blue: #0073e6;
+            --ice-blue: #b8e6ff;
+            --dark-blue: #004d99;
+            --orange: #ff6b35;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --dark-gray: #2d3748;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--ice-blue) 100%);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        #header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 115, 230, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .flex a:first-child i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .flex a:first-child i:hover {
+            transform: rotate(360deg) scale(1.1);
+            color: var(--orange);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        nav a:hover {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 115, 230, 0.3);
+        }
+
+        .btn-contato button {
+            background: linear-gradient(135deg, var(--orange), #ff4500);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-contato button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Banner Styles */
+        .banner {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 115, 230, 0.8), rgba(0, 77, 153, 0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><radialGradient id="ice" cx="50%" cy="50%"><stop offset="0%" style="stop-color:%23ffffff;stop-opacity:0.3"/><stop offset="100%" style="stop-color:%23b8e6ff;stop-opacity:0.1"/></radialGradient></defs><rect fill="url(%23ice)" width="100%" height="100%"/><circle cx="200" cy="200" r="150" fill="rgba(255,255,255,0.1)"/><circle cx="800" cy="300" r="100" fill="rgba(255,255,255,0.08)"/><circle cx="1000" cy="600" r="120" fill="rgba(255,255,255,0.06)"/></svg>');
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(50%); }
+        }
+
+        .banner h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .banner span {
+            color: var(--orange);
+            text-shadow: 2px 2px 15px rgba(255, 107, 53, 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Section Styles */
+        .intro {
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-top: -50px;
+            z-index: 10;
+            position: relative;
+            border-radius: 50px 50px 0 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .intro h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            opacity: 0.8;
+        }
+
+        /* About Section */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin: 4rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(0, 115, 230, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .about:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 115, 230, 0.15);
+        }
+
+        .about.reverse {
+            grid-template-columns: 1fr 1fr;
+            direction: rtl;
+        }
+
+        .about.reverse > * {
+            direction: ltr;
+        }
+
+        .about-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.1);
+        }
+
+        .about-content h1 {
+            font-size: 2.5rem;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+        }
+
+        .about-content span {
+            color: var(--primary-blue);
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--dark-gray);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 115, 230, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 115, 230, 0.4);
+            color: white;
+        }
+
+        /* Table Styles */
+        .top-pinguins {
+            background: rgba(255, 255, 255, 0.9);
+            margin: 4rem 0;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(0, 115, 230, 0.1);
+        }
+
+        .top-pinguins h2 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid rgba(0, 115, 230, 0.1);
+            background: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        tr:hover td {
+            background: rgba(0, 115, 230, 0.05);
+            transform: scale(1.02);
+        }
+
+        tr:nth-child(2) td span {
+            color: var(--orange);
+            font-weight: 600;
+        }
+
+        /* List Container */
+        .container1 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 4rem auto;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .list {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(0, 115, 230, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .list:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 115, 230, 0.15);
+        }
+
+        .list h2 {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .list ol, .list ul {
+            padding-left: 1.5rem;
+        }
+
+        .list li {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .list li:hover {
+            color: var(--primary-blue);
+            transform: translateX(10px);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark-gray), #1a202c);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .banner h1 {
+                font-size: 2.5rem;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about.reverse {
+                grid-template-columns: 1fr;
+            }
+
+            .container1 {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .flex {
+                justify-content: space-between;
+            }
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-gray);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+        }
+    </style>
 </head>
 <body>
     <header id="header">
@@ -34,15 +460,15 @@
                 <div class="btn-contato">
                     <a href="cadastro.html"><button>CADASTRO</button></a>
                 </div>
-            </div><!--flex-->
-        </div><!--container-->
+            </div>
+        </div>
     </header>
 
     <section class="banner">
-        <h1>O PINGUIM -<span> REI</span></h1>
+        <h1>O PINGUIM <span>REI</span></h1>
     </section>
 
-    <section class="intro">
+    <section class="intro fade-in">
         <div class="container">
             <h2>Descubra o Fascinante Mundo do Pinguim Rei!</h2>
             <p>Explore o habitat, características e curiosidades deste incrível pinguim.</p>
@@ -50,9 +476,9 @@
     </section>
 
     <div class="container">
-        <section class="about">
-            <div class="about-image">
-                <img src="img/Penguins.jpg" alt="tamanho e aparencia">
+        <section class="about fade-in">
+            <div class="about-image floating">
+                <img src="https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="tamanho e aparencia">
             </div>
             <div class="about-content">
                 <h1>Pinguim-Rei: <span>O Rei do Gelo</span></h1>
@@ -65,37 +491,39 @@
         </section>
     </div>
 
-    <section class="top-pinguins">
-        <h2 style="text-align: center;">Top 3 Maiores Pinguins:</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Espécie</th>
-                    <th>Altura Média</th>
-                    <th>Peso Médio</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Pinguim-Imperador</td>
-                    <td>1,1 m</td>
-                    <td>22-45 kg</td>
-                </tr>
-                <tr>
-                    <td><span>Pinguim-Rei</span></td>
-                    <td><span>0,9 m</span></td>
-                    <td><span>9,3-18 kg</span></td>
-                </tr>
-                <tr>
-                    <td>Pinguim-Rei Adélia</td>
-                    <td>0,7 m</td>
-                    <td>4-6 kg</td>
-                </tr>
-            </tbody>
-        </table>
+    <section class="top-pinguins fade-in">
+        <div class="container">
+            <h2>Top 3 Maiores Pinguins:</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Espécie</th>
+                        <th>Altura Média</th>
+                        <th>Peso Médio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pinguim-Imperador</td>
+                        <td>1,1 m</td>
+                        <td>22-45 kg</td>
+                    </tr>
+                    <tr>
+                        <td><span>Pinguim-Rei</span></td>
+                        <td><span>0,9 m</span></td>
+                        <td><span>9,3-18 kg</span></td>
+                    </tr>
+                    <tr>
+                        <td>Pinguim-Rei Adélia</td>
+                        <td>0,7 m</td>
+                        <td>4-6 kg</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 
-    <div class="container1">
+    <div class="container1 fade-in">
         <div class="list">
             <h2>5 Fatos Impressionantes sobre os Pinguins-Rei:</h2>
             <ol>
@@ -117,11 +545,11 @@
             </ul>
         </div>
     </div>
-<br>
+
     <div class="container">
-        <section class="about">
-            <div class="about-image">
-                <img src="img/habitat.jpeg" alt="habitat">
+        <section class="about fade-in">
+            <div class="about-image floating">
+                <img src="https://images.unsplash.com/photo-1517540165837-315e4ddf9ba3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="habitat">
             </div>
             <div class="about-content">
                 <h1><span>Habitat</span> do Pinguim-Rei</h1>
@@ -131,9 +559,9 @@
             </div>
         </section>
         
-        <section class="about reverse">
-            <div class="about-image">
-                <img src="img/fuga.jpg" alt="Habilidades de Natação">
+        <section class="about reverse fade-in">
+            <div class="about-image floating">
+                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Habilidades de Natação">
             </div>
             <div class="about-content">
                 <h1><span>Características</span> do Pinguim-Rei</h1>
@@ -145,7 +573,7 @@
     </div>
 
     <div class="container">
-        <section class="about reverse">
+        <section class="about reverse fade-in">
             <div class="about-content">
                 <h1><span>Curiosidade:</span> Gunter de "Hora de Aventura"</h1>
                 <h3 style="text-align: center;">Você Sabia?</h3><br>
@@ -154,10 +582,10 @@
                     <a href="curio.html" class="btn">Ver Mais</a>
                 </div>
             </div>
-            <div class="about-image">
-                <img src="img/gunter.gif" alt="gunter">
+            <div class="about-image floating">
+                <img src="https://images.unsplash.com/photo-1518887404382-84b9e5e75de6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="pinguim curioso">
             </div>
-            </section>
+        </section>
     </div>
     
     <footer>
@@ -166,6 +594,59 @@
         </div>
     </footer>
 
-    <script src="menu.js"></script>
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 4px 30px rgba(0, 115, 230, 0.2)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 115, 230, 0.1)';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
 </body>
 </html>
