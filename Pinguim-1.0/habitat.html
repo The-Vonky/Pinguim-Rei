@@ -5,8 +5,582 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-    <title>O Pinguim Rei</title>
-    <link rel="stylesheet" href="habitat.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Habitat do Pinguim Rei</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary-blue: #0073e6;
+            --ice-blue: #b8e6ff;
+            --dark-blue: #004d99;
+            --arctic-white: #f0f8ff;
+            --snow-white: #ffffff;
+            --frost-gray: #e8f4f8;
+            --dark-gray: #2d3748;
+            --ice-cyan: #00bcd4;
+            --antarctic-blue: #1e3a8a;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: linear-gradient(135deg, var(--arctic-white) 0%, var(--ice-blue) 50%, var(--frost-gray) 100%);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        #header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 115, 230, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .flex a:first-child i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+
+        .flex a:first-child i:hover {
+            transform: rotate(360deg) scale(1.1);
+            color: var(--ice-cyan);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        nav a:hover {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 115, 230, 0.3);
+        }
+
+        nav a[href="habitat.html"] {
+            background: linear-gradient(135deg, var(--ice-cyan), var(--primary-blue));
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+        }
+
+        .btn-contato button {
+            background: linear-gradient(135deg, var(--ice-cyan), #0097a7);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+        }
+
+        .btn-contato button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 188, 212, 0.4);
+        }
+
+        /* Banner Styles */
+        .banner {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 115, 230, 0.8), rgba(30, 58, 138, 0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><radialGradient id="ice" cx="50%" cy="50%"><stop offset="0%" style="stop-color:%23ffffff;stop-opacity:0.4"/><stop offset="100%" style="stop-color:%23b8e6ff;stop-opacity:0.1"/></radialGradient><pattern id="snowflakes" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.3)"/><circle cx="80" cy="60" r="1.5" fill="rgba(255,255,255,0.2)"/><circle cx="50" cy="90" r="1" fill="rgba(255,255,255,0.4)"/></pattern></defs><rect fill="url(%23ice)" width="100%" height="100%"/><rect fill="url(%23snowflakes)" width="100%" height="100%"/><path d="M0,400 Q300,300 600,400 T1200,400 L1200,800 L0,800 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '❄️';
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .banner::after {
+            content: '🏔️';
+            position: absolute;
+            bottom: 20%;
+            right: 15%;
+            font-size: 3rem;
+            opacity: 0.4;
+            animation: float 3s ease-in-out infinite reverse;
+        }
+
+        .banner h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .banner span {
+            color: var(--ice-cyan);
+            text-shadow: 2px 2px 15px rgba(0, 188, 212, 0.7);
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 188, 212, 0.3); }
+            to { text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 188, 212, 0.6); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Intro Section */
+        .intro {
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-top: -50px;
+            z-index: 10;
+            position: relative;
+            border-radius: 50px 50px 0 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 -10px 40px rgba(0, 115, 230, 0.1);
+        }
+
+        .intro h2 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--ice-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            opacity: 0.8;
+        }
+
+        /* About Section Styles */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin: 4rem 0;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 50px rgba(0, 115, 230, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 188, 212, 0.05), transparent);
+            animation: rotate 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .about:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 70px rgba(0, 115, 230, 0.2);
+        }
+
+        .about.reverse {
+            grid-template-columns: 1fr 1fr;
+            direction: rtl;
+        }
+
+        .about.reverse > * {
+            direction: ltr;
+        }
+
+        /* Image Styles */
+        .about-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(0, 188, 212, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .about-image:hover::before {
+            opacity: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+            border-radius: 20px;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Content Styles */
+        .about-content {
+            z-index: 1;
+            position: relative;
+        }
+
+        .about-content h1 {
+            font-size: 2.5rem;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .about-content h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--ice-cyan));
+            border-radius: 2px;
+        }
+
+        .about-content span {
+            background: linear-gradient(135deg, var(--primary-blue), var(--ice-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        .about-content h3 {
+            color: var(--ice-cyan);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+            text-align: justify;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-blue), var(--ice-cyan));
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 115, 230, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 115, 230, 0.4);
+            color: white;
+        }
+
+        /* Climate Info Card */
+        .climate-info {
+            background: linear-gradient(135deg, var(--ice-blue), var(--arctic-white));
+            margin: 3rem 0;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0, 188, 212, 0.15);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .climate-info::before {
+            content: '🌡️';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 3rem;
+            opacity: 0.3;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .climate-info h2 {
+            color: var(--antarctic-blue);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .temperature-display {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .temp-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .temp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .temp-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--ice-cyan);
+        }
+
+        .temp-label {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            margin-top: 0.5rem;
+        }
+
+        /* Location Map Section */
+        .location-section {
+            background: rgba(255, 255, 255, 0.9);
+            margin: 4rem 0;
+            padding: 3rem;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 50px rgba(0, 115, 230, 0.1);
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .location-card {
+            background: linear-gradient(135deg, var(--frost-gray), var(--arctic-white));
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .location-card:hover {
+            border-color: var(--ice-cyan);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 188, 212, 0.2);
+        }
+
+        .location-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .location-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark-gray), #1a202c);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--ice-cyan), var(--primary-blue));
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .banner h1 {
+                font-size: 2.5rem;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 2rem;
+            }
+
+            .about.reverse {
+                grid-template-columns: 1fr;
+            }
+
+            .temperature-display {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--arctic-white);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-blue), var(--ice-cyan));
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--ice-cyan), var(--primary-blue));
+        }
+    </style>
 </head>
 <body>
     <header id="header">
@@ -24,63 +598,119 @@
                 <div class="btn-contato">
                     <a href="cadastro.html"><button>CADASTRO</button></a>
                 </div>
-            </div><!--flex-->
-        </div><!--container-->
+            </div>
+        </div>
     </header>
 
     <section class="banner">
-        <h1>HABITAT DO PINGUIM -<span> REI</span></h1>
+        <h1>HABITAT DO PINGUIM <span>REI</span></h1>
     </section>
 
-    <section class="intro">
+    <section class="intro fade-in">
         <div class="container">
             <h2>O Habitat do Pinguim-Rei</h2>
-            <p>Descubra onde este incrível pinguim vive e prospera.</p>
+            <p>Descubra onde este incrível pinguim vive e prospera nas regiões mais geladas do planeta.</p>
         </div>
     </section>
-<br>
+
+    <div class="climate-info fade-in">
+        <div class="container">
+            <h2>Condições Climáticas Extremas</h2>
+            <div class="temperature-display">
+                <div class="temp-card">
+                    <div class="temp-value">-10°C</div>
+                    <div class="temp-label">Mínima</div>
+                </div>
+                <div class="temp-card">
+                    <div class="temp-value">0°C</div>
+                    <div class="temp-label">Máxima</div>
+                </div>
+                <div class="temp-card">
+                    <div class="temp-value">120km/h</div>
+                    <div class="temp-label">Ventos</div>
+                </div>
+            </div>
+            <p>Os pinguins-rei são especialistas em clima frio! Eles enfrentam condições extremas com seus casacos naturais e habilidades de navegação incríveis.</p>
+        </div>
+    </div>
+
     <div class="container">
-        <section class="about">
+        <section class="about slide-in-left">
             <div class="about-image">
-                <img src="img/habitat.jpeg" alt="habitat">
+                <img src="https://images.unsplash.com/photo-1517540165837-315e4ddf9ba3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="habitat antártico">
             </div>
             <div class="about-content">
                 <h1><span>Habitat</span> do Pinguim-Rei</h1>
-                <h3 style="text-align: center;">Onde Eles Vivem?</h3><br>
+                <h3>Onde Eles Vivem?</h3>
                 <p>Imagine-se em uma ilha mágica onde o frio é constante e o vento é como um secador de cabelo na potência máxima, mas gelado! Bem-vindo ao mundo do Pinguim-Rei! Esses elegantes moradores do frio adoram as ilhas subantárticas e algumas partes do continente antártico.</p>
-                <div class="align"><a href="https://www.wikiaves.com.br/wiki/pinguim-rei" class="btn">Ver Mais</a></div>
+                <p>Suas colônias podem ser encontradas em praias rochosas, onde milhares de pinguins se reúnem para formar comunidades impressionantes que resistem aos ventos gelados da Antártida.</p>
+                <div class="align">
+                    <a href="https://www.wikiaves.com.br/wiki/pinguim-rei" class="btn">Ver Mais</a>
+                </div>
             </div>
         </section>
         
-        <section class="about reverse">
+        <section class="about reverse slide-in-right">
             <div class="about-image">
-                <img src="img/ilha.jpg" alt="ilha">
+                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="ilha subantártica">
             </div>
             <div class="about-content">
-                <h1><span>Características</span> do Pinguim-Rei</h1>
-                <h3 style="text-align: center;">Ambiente:</h3><br>
+                <h1><span>Ambiente</span> Subantártico</h1>
+                <h3>Ilhas Rochosas e Costas Geladas</h3>
                 <p>Os pinguins-rei são verdadeiros aventureiros das regiões geladas! Eles são encontrados principalmente em regiões costeiras e ilhas subantárticas ao redor da Antártida. Essas áreas oferecem a combinação perfeita de mar gelado e terreno rochoso para os pinguins construírem seus ninhos e explorarem as águas frias em busca de comida.</p>
-                <p>Eles são como os "exploradores da Antártida", navegando pelas costas geladas em busca de novas aventuras marítimas!</p>
-                <div class="align"><a href="https://pt.wikipedia.org/wiki/Ant%C3%A1rtida" class="btn">Ver Mais</a></div>
+                <p>Eles são como os "exploradores da Antártida", navegando pelas costas geladas em busca de novas aventuras marítimas! Suas colônias formam verdadeiras cidades de gelo, onde a cooperação é essencial para a sobrevivência.</p>
+                <div class="align">
+                    <a href="https://pt.wikipedia.org/wiki/Ant%C3%A1rtida" class="btn">Ver Mais</a>
+                </div>
             </div>
         </section>
     </div>
 
+    <section class="location-section fade-in">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary-blue); font-size: 2.5rem; margin-bottom: 1rem;">Principais Localizações</h2>
+            <p style="text-align: center; font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem;">Conheça os principais territórios onde os Pinguins-Rei estabelecem suas colônias</p>
+            
+            <div class="location-grid">
+                <div class="location-card">
+                    <div class="location-icon">🏔️</div>
+                    <h3>Ilhas Geórgia do Sul</h3>
+                    <p>Lar das maiores colônias de pinguins-rei, com mais de 200.000 casais reprodutores.</p>
+                </div>
+                <div class="location-card">
+                    <div class="location-icon">🌊</div>
+                    <h3>Ilhas Crozet</h3>
+                    <p>Arquipélago francês no Oceano Índico, importante área de reprodução e alimentação.</p>
+                </div>
+                <div class="location-card">
+                    <div class="location-icon">❄️</div>
+                    <h3>Ilhas Kerguelen</h3>
+                    <p>Território austral francês conhecido como "Terras Desoladas", habitat crucial dos pinguins-rei.</p>
+                </div>
+                <div class="location-card">
+                    <div class="location-icon">🐧</div>
+                    <h3>Ilha Macquarie</h3>
+                    <p>Patrimônio Mundial da UNESCO, abriga uma das colônias mais estudadas cientificamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <div class="container">
-        <section class="about reverse">
+        <section class="about reverse slide-in-left">
             <div class="about-content">
-                <h1><span>Curiosidade:</span></h1>
-                <h3 style="text-align: center;">Clima e Temperatura:</h3><br>
+                <h1><span>Adaptação</span> Climática</h1>
+                <h3>Mestres da Sobrevivência no Frio</h3>
                 <p>Os pinguins-rei são especialistas em clima frio! Eles preferem temperaturas baixas, geralmente entre -10°C e 0°C, ideais para suas penas isolantes e gordura protetora. As condições climáticas incluem ventos fortes e nevascas ocasionais, que os pinguins enfrentam com seus casacos naturais e habilidades de navegação.</p>
-                <p>Eles são como os "meteorologistas de gelo", sempre preparados para o próximo clima louco na Antártida!</p>
+                <p>Eles são como os "meteorologistas de gelo", sempre preparados para o próximo clima louco na Antártida! Suas adaptações incluem penas densas em três camadas, que funcionam como um sistema de isolamento térmico natural extremamente eficiente.</p>
                 <div class="align">
                     <a href="https://jornaltribunadonorte.com.br/qual-o-mais-frio-o-polo-sul-ou-o-polo-norte/" class="btn">Ver Mais</a>
                 </div>
             </div>
             <div class="about-image">
-                <img src="img/temp.jpg" alt="termometro">
+                <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="pinguim no gelo">
             </div>
-            </section>
+        </section>
     </div>
     
     <footer>
@@ -89,6 +719,34 @@
         </div>
     </footer>
 
-    <script src="menu.js"></script>
-</body>
-</html>
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animation elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 6px 35px rgba(0, 115, 230, 0.25)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 4px 30px rgba(0, 115, 230, 0.15)';
+            }
+        });
